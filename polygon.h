@@ -15,6 +15,7 @@ using namespace std;
 /// @class Polygon
 /// @brief an abstract base class for polygons
 class Polygon {
+
 protected:
 	float perimeter; 
 	float area;

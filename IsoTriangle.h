@@ -17,7 +17,6 @@ class IsoTriangle : public Polygon
 {
 private:
     float base, height;
-
     float Area();
     float Perimeter();
 
@@ -67,6 +66,8 @@ public:
     /// @}
 
     void Draw();
+    
+    void Update(); //function to update parameters of the objects;
 
 };
 

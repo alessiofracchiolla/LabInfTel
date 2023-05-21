@@ -21,7 +21,6 @@ IsoTriangle::IsoTriangle() {
 /// @brief constructor 
 /// @param b base of the IsoTriangle
 /// @param h height of the IsoTriangle
-/// @param s side of the IsoTriangle
 IsoTriangle::IsoTriangle(float b, float h) {
 
 	Init();
@@ -38,11 +37,7 @@ IsoTriangle::IsoTriangle(float b, float h) {
 	else
 		height = h;
 
-	/*if (s <= 0.)
-		cout << "WARNING: IsoTriangle - constructor: side should be > 0" << endl;
-	else
-		side = s;
-		*/
+	Update();
 
 
 }
@@ -94,12 +89,13 @@ void IsoTriangle::Init() {
 	Reset();
 	base = 0.;
 	height = 0.;
-	
+	Update();
 }
 
 
 /// @brief initialization of the object as a copy of an object 
 /// @param r reference to the object that should be copied 
+/// 
 void IsoTriangle::Init(const IsoTriangle& t) {
 	Reset();
 	base = t.base;
@@ -124,7 +120,7 @@ void IsoTriangle::SetBase(float b) {
 	}
 
 	base = b;
-
+	Update();
 }
 
 /// @brief set height of the object
@@ -138,7 +134,7 @@ void IsoTriangle::SetHeight(float h) {
 	}
 
 	height = h;
-
+	Update();
 }
 
 
@@ -179,20 +175,19 @@ float IsoTriangle::GetSide() {
 /// @brief get base and height of the object
 /// @param b base 
 /// @param h height
-/// @param s side
 void IsoTriangle::GetDim(float& b, float& h) {
 
 	b = base;
 	h = height;
-
-	return;
+    return;
 }
 
 /// @brief get the area of the object
 /// @return area of the IsoTriangle
 float IsoTriangle::Area() {
 
-	return (float)((base * height) / 2);
+	area = (float)((base * height) / 2);
+	return area;
 
 }
 
@@ -201,7 +196,8 @@ float IsoTriangle::Area() {
 float IsoTriangle::Perimeter() {
 
 	float side = GetSide();
-	return (2 * side) + base;
+	perimeter = (2 * side) + base;
+	return perimeter;
 
 }
 
@@ -228,8 +224,7 @@ void IsoTriangle::WarningMessage(const char* string) {
 
 /// @brief for debugging: all about the object
 void IsoTriangle::Dump() {
-	cout << endl;
-	cout << "IsoTriangle data:" << endl;
+	cout << "IsoTriangle data: \n" << endl;
 	cout << "base = " << base << endl;
 	cout << "height = " << height << endl;
 	cout << "Perimeter = " << GetPerimeter() << endl;
@@ -244,11 +239,20 @@ void IsoTriangle::Dump() {
  void IsoTriangle::Draw() {
 
 	cout << endl;
-	cout << "sto disegnando un triangolo isoscele" << endl;
+	cout << "Sto disegnando un triangolo isoscele: " << endl;
 	cout << endl << flush;
+	Dump();
 
 }
 
+ /// @brief function to update parameters of the objects
+ void IsoTriangle::Update() {
+
+	 GetSide();
+	 Area();
+	 Perimeter();
+
+ }
 
 
  
